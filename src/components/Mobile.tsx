@@ -179,7 +179,7 @@ export default function Mobile() {
       </Card>
 
       {basalMetabolicRate !== null && totalDailyEnergyExpenditure !== null && (
-        <div className="bg-zinc-900 text-white p-4 mt-6 md:ml-10 rounded-lg border border-zinc-700 w-full md:max-w-sm text-center space-y-2">
+        <div className="bg-zinc-900 w-full max-w-md md:max-w-lg text-white p-4 mt-6 md:ml-10 rounded-lg border border-zinc-700  text-center space-y-2">
           <p className="text-xl font-semibold text-blue-400">
             Your Health Metrics
           </p>

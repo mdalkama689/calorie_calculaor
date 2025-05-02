@@ -1,6 +1,6 @@
 "use client";
 
-import { act, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -14,7 +14,6 @@ import {
 import { toast } from "sonner";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getNamedMiddlewareRegex } from "next/dist/shared/lib/router/utils/route-regex";
 import { GrPowerReset } from "react-icons/gr";
 
 export default function Mobile() {

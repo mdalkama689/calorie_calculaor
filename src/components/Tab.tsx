@@ -14,6 +14,7 @@ import {
 import { toast } from "sonner";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { GrPowerReset } from "react-icons/gr";
 
 export default function Tab() {
   const weightArr = Array.from({ length: 111 }, (_, i) => 40 + i);
@@ -27,9 +28,9 @@ export default function Tab() {
     { value: 1.9, label: "Very Active (twice/day etc.)" },
   ];
 
-  const [weight, setWeight] = useState<number>();
-  const [height, setHeight] = useState<number>();
-  const [age, setAge] = useState<number>();
+  const [weight, setWeight] = useState<number | null>(null);
+  const [height, setHeight] = useState<number | null>(null);
+  const [age, setAge] = useState<number | null>(null);
   const [gender, setGender] = useState<string>("");
   const [activity, setActivity] = useState<string>("");
   const [basalMetabolicRate, setBasalMetabolicRate] = useState<number | null>(
@@ -58,6 +59,15 @@ export default function Tab() {
     setTotalDailyEnergyExpenditure(Math.round(tdee));
   };
 
+  const resetValue = () => {
+    setWeight(null);
+    setHeight(null);
+    setAge(null);
+    setGender("");
+    setActivity("");
+    setBasalMetabolicRate(null);
+    setTotalDailyEnergyExpenditure(null);
+  };
   return (
     <div className="min-h-screen  bg-black text-white py-6 px-4 flex items-center justify-center">
       <Card className="w-full max-w-md md:max-w-lg bg-zinc-900 border border-zinc-700 shadow-xl rounded-2xl">
@@ -71,7 +81,10 @@ export default function Tab() {
             <Label htmlFor="weight" className="text-white">
               Weight (kg)
             </Label>
-            <Select onValueChange={(val) => setWeight(Number(val))}>
+            <Select
+              value={weight === null ? "" : weight.toString()}
+              onValueChange={(val) => setWeight(Number(val))}
+            >
               <SelectTrigger className="w-full bg-zinc-800 border-zinc-600 text-white">
                 <SelectValue placeholder="Select weight" />
               </SelectTrigger>
@@ -92,7 +105,10 @@ export default function Tab() {
             <Label htmlFor="height" className="text-white">
               Height (cm)
             </Label>
-            <Select onValueChange={(val) => setHeight(Number(val))}>
+            <Select
+              value={height === null ? "" : height.toString()}
+              onValueChange={(val) => setHeight(Number(val))}
+            >
               <SelectTrigger className="w-full bg-zinc-800 border-zinc-600 text-white">
                 <SelectValue placeholder="Select height" />
               </SelectTrigger>
@@ -113,7 +129,10 @@ export default function Tab() {
             <Label htmlFor="age" className="text-white">
               Age{" "}
             </Label>
-            <Select onValueChange={(val) => setAge(Number(val))}>
+            <Select
+              value={age === null ? "" : age.toString()}
+              onValueChange={(val) => setAge(Number(val))}
+            >
               <SelectTrigger className="w-full bg-zinc-800 border-zinc-600 text-white">
                 <SelectValue placeholder="Select age" />
               </SelectTrigger>
@@ -134,7 +153,10 @@ export default function Tab() {
             <Label htmlFor="hip" className="text-white">
               Activity Level
             </Label>
-            <Select onValueChange={(val) => setActivity(val)}>
+            <Select
+              value={activity === null ? "" : activity.toString()}
+              onValueChange={(val) => setActivity(val)}
+            >
               <SelectTrigger className="w-full bg-zinc-800 border-zinc-600 text-white">
                 <SelectValue placeholder="Select activity level" />
               </SelectTrigger>
@@ -155,7 +177,10 @@ export default function Tab() {
             <Label htmlFor="gender" className="text-white">
               Gender
             </Label>
-            <Select onValueChange={(val) => setGender(val)}>
+            <Select
+              value={gender === null ? "" : gender.toString()}
+              onValueChange={(val) => setGender(val)}
+            >
               <SelectTrigger className="w-full bg-zinc-800 border-zinc-600 text-white">
                 <SelectValue placeholder="Select gender" />
               </SelectTrigger>
@@ -169,12 +194,18 @@ export default function Tab() {
             </Select>
           </div>
 
-          <Button
-            className="w-full bg-blue-600 hover:bg-blue-700 cursor-pointer"
-            onClick={calculateHealthMetrics}
-          >
-            Calculate
-          </Button>
+          <div className="flex justify-center items-center gap-3">
+            <Button
+              className="w-[90%] bg-blue-600 hover:bg-blue-700 cursor-pointer"
+              onClick={calculateHealthMetrics}
+            >
+              Calculate
+            </Button>
+            <GrPowerReset
+              onClick={resetValue}
+              className="w-fit text-white font-bold text-2xl cursor-pointer"
+            />
+          </div>
         </CardContent>
       </Card>
 
